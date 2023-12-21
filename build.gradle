@@ -1,0 +1,55 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.1.7'
+	id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'com.giffing.bucket4j.spring.boot.starter:bucket4j-spring-boot-starter:0.8.1'
+
+
+    // implementation 'com.giffing.bucket4j.spring.boot.starter:bucket4j-spring-boot-starter:0.10.0'
+	// implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    // implementation 'com.giffing.bucket4j.spring.boot.starter:bucket4j-spring-boot-starter-context:0.10.0'
+    // implementation 'javax.cache:cache-api'
+    // compileOnly 'com.github.vladimir-bukhtoyarov:bucket4j-hazelcast:6.3.0'
+    // implementation 'com.hazelcast:hazelcast'
+    // implementation 'com.hazelcast:hazelcast-spring:5.3.6'
+    // // to make sure work validate
+    // implementation 'org.springframework.boot:spring-boot-starter-validation'
+    // implementation 'org.springframework.boot:spring-boot-starter-cache'
+    // implementation 'org.ehcache:ehcache:3.10.8'
+    // implementation 'com.github.ben-manes.caffeine:caffeine:2.8.2'
+    // implementation 'com.github.ben-manes.caffeine:jcache:2.8.2'
+	implementation 'com.github.vladimir-bukhtoyarov:bucket4j-core:4.10.0'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.7.0'
+
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// Logging
+    compileOnly 'org.projectlombok:lombok:1.18.26'
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+    testCompileOnly 'org.projectlombok:lombok:1.18.26'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.26'
+}
+
+tasks.named('bootBuildImage') {
+	builder = 'paketobuildpacks/builder-jammy-base:latest'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
